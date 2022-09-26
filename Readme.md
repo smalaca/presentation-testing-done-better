@@ -3,9 +3,9 @@
    1. Start:
    2. Default to exception: 
 2. tdd-is-not-enough - tests written in TDD manner with full coverage but without important scenarios
-   1. Start at commit: 
-   2. Many presentations:
-   3. Parametrized tests with presentation availability: 
+   1. Start at commit: Add tests suite ConferenceTest
+   2. Many presentations: Add scenario with many registered presentations
+   3. Parametrized tests with presentation availability: Convert invalid title tests into parametrized test 
 3. coverage-as-info - how to use coverage as an information
    1. Start at commit: Add tests suite ConferenceTest
    2. Add missing scenario: Add missing tests to recognize unavailable slot
