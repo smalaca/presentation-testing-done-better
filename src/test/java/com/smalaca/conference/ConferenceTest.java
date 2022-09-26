@@ -15,6 +15,8 @@ class ConferenceTest {
     private static final int INVALID_SLOT_NUMBER = 0;
     private static final int AVAILABLE_SLOT_NUMBER = 13;
     private static final int NOT_AVAILABLE_SLOT_NUMBER = 42;
+    private static final int ANOTHER_NOT_AVAILABLE_SLOT_NUMBER = 1;
+    private static final int YET_ANOTHER_NOT_AVAILABLE_SLOT_NUMBER = 27;
 
     private final PresentationDtoFactory presentationDtoFactory = new PresentationDtoFactory(
             new TitleValidator(), new ContentValidator(), new SlotNumberValidator());
@@ -111,6 +113,21 @@ class ConferenceTest {
 
         IllegalArgumentException actual = assertThrows(IllegalArgumentException.class, executable);
         assertThat(actual).hasMessage("Unavailable slot.");
+    }
+
+    @Test
+    void shouldRegisterPresentationWhenPresentationsForDifferentSlotsAlreadyRegistered() {
+        Conference conference = conference();
+        conference.register(VALID_TITLE, VALID_CONTENT, NOT_AVAILABLE_SLOT_NUMBER);
+        conference.register(VALID_TITLE, VALID_CONTENT, ANOTHER_NOT_AVAILABLE_SLOT_NUMBER);
+        conference.register(VALID_TITLE, VALID_CONTENT, YET_ANOTHER_NOT_AVAILABLE_SLOT_NUMBER);
+
+        Presentation actual = conference.register(VALID_TITLE, VALID_CONTENT, AVAILABLE_SLOT_NUMBER);
+
+        assertThat(actual).extracting("title").isEqualTo(VALID_TITLE);
+        assertThat(actual).extracting("content").isEqualTo(VALID_CONTENT);
+        assertThat(actual).extracting("slotNumber").isEqualTo(AVAILABLE_SLOT_NUMBER);
+        assertThat(actual).extracting("presentationId").isInstanceOf(UUID.class);
     }
 
     private Conference conference() {
