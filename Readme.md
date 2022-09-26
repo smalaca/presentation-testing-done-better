@@ -1,7 +1,13 @@
 ## Branches
 1. mock-all-the-things - tests that makes development more difficult due to mock abuse.
-   1. Start:
-   2. Default to exception: 
+   1. Start: Add tests suites
+      1. Test for each class - too many and make it unsafe to refactor.
+      2. PresentationDtoFactoryTest - no tests for handling exceptions.
+      3. PresentationFactoryTest - test that supports not existing scenario when DTO is null.
+      4. ConferenceTest - we do not validate Presentation creation.
+   2. Method contract changes: Presentation.scheduledForSlot throws exception
+      1. Unit Tests added.
+      2. What about support in Conference?
 2. tdd-is-not-enough - tests written in TDD manner with full coverage but without important scenarios
    1. Start at commit: Add tests suite ConferenceTest
    2. Many presentations: Add scenario with many registered presentations
