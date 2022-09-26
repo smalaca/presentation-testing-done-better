@@ -2,6 +2,8 @@ package com.smalaca.conference;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.UUID;
 
@@ -32,31 +34,12 @@ class ConferenceTest {
         assertThat(actual).hasMessage("Invalid title received.");
     }
 
-    @Test
-    void shouldRecognizeInvalidTitleWhenBlank() {
+    @ParameterizedTest
+    @ValueSource(strings = {"", "    ", "short", "shortie", "got 41 characters so it means is too long"})
+    void shouldRecognizeInvalidTitle(String title) {
         Conference conference = conference();
 
-        Executable executable = () -> conference.register("", VALID_CONTENT, AVAILABLE_SLOT_NUMBER);
-
-        IllegalArgumentException actual = assertThrows(IllegalArgumentException.class, executable);
-        assertThat(actual).hasMessage("Invalid title.");
-    }
-
-    @Test
-    void shouldRecognizeInvalidTitleWhenTooShort() {
-        Conference conference = conference();
-
-        Executable executable = () -> conference.register("short", VALID_CONTENT, AVAILABLE_SLOT_NUMBER);
-
-        IllegalArgumentException actual = assertThrows(IllegalArgumentException.class, executable);
-        assertThat(actual).hasMessage("Invalid title.");
-    }
-
-    @Test
-    void shouldRecognizeInvalidTitleWhenTooLong() {
-        Conference conference = conference();
-
-        Executable executable = () -> conference.register("got 41 characters so it means is too long", VALID_CONTENT, AVAILABLE_SLOT_NUMBER);
+        Executable executable = () -> conference.register(title, VALID_CONTENT, AVAILABLE_SLOT_NUMBER);
 
         IllegalArgumentException actual = assertThrows(IllegalArgumentException.class, executable);
         assertThat(actual).hasMessage("Invalid title.");
