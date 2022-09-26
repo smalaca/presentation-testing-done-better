@@ -10,7 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ConferenceTest {
     private static final String VALID_TITLE = "Testing better";
+    private static final String INVALID_TITLE = "";
     private static final String VALID_CONTENT = "Learn how to write better tests.";
+    private static final String INVALID_CONTENT = "";
     private static final int INVALID_SLOT_NUMBER = 0;
     private static final int AVAILABLE_SLOT_NUMBER = 13;
     private static final int NOT_AVAILABLE_SLOT_NUMBER = 42;
@@ -30,6 +32,16 @@ class ConferenceTest {
     }
 
     @Test
+    void shouldRecognizeInvalidTitle() {
+        Conference conference = conference();
+
+        Executable executable = () -> conference.register(INVALID_TITLE, VALID_CONTENT, AVAILABLE_SLOT_NUMBER);
+
+        IllegalArgumentException actual = assertThrows(IllegalArgumentException.class, executable);
+        assertThat(actual).hasMessage("Invalid title.");
+    }
+
+    @Test
     void shouldRecognizeMissingContent() {
         Conference conference = conference();
 
@@ -37,6 +49,16 @@ class ConferenceTest {
 
         IllegalArgumentException actual = assertThrows(IllegalArgumentException.class, executable);
         assertThat(actual).hasMessage("Invalid content received.");
+    }
+
+    @Test
+    void shouldRecognizeInvalidContent() {
+        Conference conference = conference();
+
+        Executable executable = () -> conference.register(VALID_TITLE, INVALID_CONTENT, AVAILABLE_SLOT_NUMBER);
+
+        IllegalArgumentException actual = assertThrows(IllegalArgumentException.class, executable);
+        assertThat(actual).hasMessage("Invalid content.");
     }
 
     @Test
