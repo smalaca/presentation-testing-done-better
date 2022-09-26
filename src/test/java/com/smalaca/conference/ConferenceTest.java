@@ -61,6 +61,17 @@ class ConferenceTest {
         assertThat(actual).extracting("presentationId").isInstanceOf(UUID.class);
     }
 
+    @Test
+    void shouldRecognizeNotAvailableSlot() {
+        Conference conference = conference();
+        conference.register(VALID_TITLE, VALID_CONTENT, NOT_AVAILABLE_SLOT_NUMBER);
+
+        Executable executable = () -> conference.register(VALID_TITLE, VALID_CONTENT, NOT_AVAILABLE_SLOT_NUMBER);
+
+        IllegalArgumentException actual = assertThrows(IllegalArgumentException.class, executable);
+        assertThat(actual).hasMessage("Unavailable slot.");
+    }
+
     private Conference conference() {
         return new Conference(presentationDtoFactory, presentationFactory);
     }
