@@ -13,17 +13,9 @@ class PresentationDtoFactory {
     }
 
     PresentationDto create(String title, String content, int slotNumber) {
-        if (!titleValidator.isValid(title)) {
-            throw new IllegalArgumentException("Invalid title.");
-        }
-
-        if (!contentValidator.isValid(content)) {
-            throw new IllegalArgumentException("Invalid content.");
-        }
-
-        if (!slotNumberValidator.isValid(slotNumber)) {
-            throw new IllegalArgumentException("Invalid slot number.");
-        }
+        titleValidator.validate(title);
+        contentValidator.validate(content);
+        slotNumberValidator.validate(slotNumber);
 
         return new PresentationDto(title, content, slotNumber);
     }

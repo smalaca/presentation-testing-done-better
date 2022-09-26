@@ -14,8 +14,12 @@ public class Conference {
     }
 
     public Presentation register(String title, String content, int slotNumber) {
-        if (title == null || content == null) {
-            throw new IllegalArgumentException("Invalid input received.");
+        if (title == null) {
+            throw new IllegalArgumentException("Invalid title received.");
+        }
+
+        if (content == null) {
+            throw new IllegalArgumentException("Invalid content received.");
         }
 
         if (isAvailable(slotNumber)) {

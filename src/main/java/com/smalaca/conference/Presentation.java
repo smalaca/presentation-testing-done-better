@@ -16,10 +16,6 @@ class Presentation {
     }
 
     boolean scheduledForSlot(int slotNumber) {
-        if (slotNumber < 1) {
-            return false;
-        }
-
         return this.slotNumber == slotNumber;
     }
 }

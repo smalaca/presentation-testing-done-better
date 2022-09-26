@@ -1,7 +1,9 @@
 package com.smalaca.conference;
 
 class SlotNumberValidator {
-    boolean isValid(int slotNumber) {
-        return slotNumber > 0;
+    void validate(int slotNumber) {
+        if (slotNumber < 1) {
+            throw new IllegalArgumentException("Invalid slot number.");
+        }
     }
 }

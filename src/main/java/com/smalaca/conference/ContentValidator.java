@@ -1,7 +1,12 @@
 package com.smalaca.conference;
 
 class ContentValidator {
-    boolean isValid(String content) {
-        return content != null && !content.isBlank();
+    void validate(String content) {
+        if (content == null) {
+            throw new IllegalArgumentException("Invalid content.");
+        }
+        if (content.isBlank()) {
+            throw new IllegalArgumentException("Invalid content.");
+        }
     }
 }
