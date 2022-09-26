@@ -7,7 +7,8 @@
    2. Many presentations:
    3. Parametrized tests with presentation availability: 
 3. coverage-as-info - how to use coverage as an information
-   1. Start at commit: 
-   2. Remove "impossible code":
-   3. Add missing scenario: 
-   4. Add unit tests: 
+   1. Start at commit: Add tests suite ConferenceTest
+   2. Add missing scenario: Add missing tests to recognize unavailable slot
+   3. Remove "impossible code": Remove code impossible to reach
+   4. Add missing scenarios: Add missing scenarios for validators
+   5. Add unit tests: Add missing unit test for validator
