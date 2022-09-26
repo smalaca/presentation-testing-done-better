@@ -16,6 +16,10 @@ class Presentation {
     }
 
     boolean scheduledForSlot(int slotNumber) {
+        if (slotNumber < 1) {
+            throw new IllegalArgumentException("Invalid slot number given.");
+        }
+
         return this.slotNumber == slotNumber;
     }
 }
